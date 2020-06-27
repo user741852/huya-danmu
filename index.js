@@ -47,7 +47,6 @@ class huya_danmu extends events {
             //主播未开播时，subsid，topsid都为空。这种情况下，爬虫无法抓取弹幕。
             //通过观察发现，subsid，topsid似乎和yyuid是一样的。因此，尝试通过把subsid和topsid设置成和yyuid一样来解决上述问题
             info.subsid = info.topsid = info.yyuid
-            //info.yyuid = 0
             return info
         } catch (e) {
             this.emit('error', new Error('Fail to get info'))
