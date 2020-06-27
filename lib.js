@@ -650,6 +650,9 @@ Taf.DataHelp = {
             case Taf.DataHelp.EN_INT32:
                 this.buf.position += 4;
                 break;
+            case Taf.DataHelp.EN_INT64:
+                this.buf.position += 8;
+                break;
             case Taf.DataHelp.EN_STRING1:
                 var e = this.buf.readUInt8();
                 this.buf.position += e;
@@ -5469,6 +5472,685 @@ HUYA.EWebSocketCommandType = {
         this.iAttendeeCount = t.readInt32(0, !1, this.iAttendeeCount)
     }
     ,
+    HUYA.OnTVAwardInfo = function() {
+        this.lOnTVId = 0,
+        this.vInfo = new Taf.Vector(new HUYA.OnTVUserAwardInfo),
+        this.iBarrageNum = 0,
+        this.iUserNum = 0,
+        this.iNewFansNum = 0,
+        this.vItemBarrageCount = new Taf.Vector(new HUYA.OnTVItemBarrageCount),
+        this.iNewSubNum = 0
+    }
+    ,
+    HUYA.OnTVAwardInfo.prototype._clone = function() {
+        return new HUYA.OnTVAwardInfo
+    }
+    ,
+    HUYA.OnTVAwardInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVAwardInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVAwardInfo.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lOnTVId),
+        t.writeVector(1, this.vInfo),
+        t.writeInt32(2, this.iBarrageNum),
+        t.writeInt32(3, this.iUserNum),
+        t.writeInt32(4, this.iNewFansNum),
+        t.writeVector(5, this.vItemBarrageCount),
+        t.writeInt32(7, this.iNewSubNum)
+    }
+    ,
+    HUYA.OnTVAwardInfo.prototype.readFrom = function(t) {
+        this.lOnTVId = t.readInt64(0, !1, this.lOnTVId),
+        this.vInfo = t.readVector(1, !1, this.vInfo),
+        this.iBarrageNum = t.readInt32(2, !1, this.iBarrageNum),
+        this.iUserNum = t.readInt32(3, !1, this.iUserNum),
+        this.iNewFansNum = t.readInt32(4, !1, this.iNewFansNum),
+        this.vItemBarrageCount = t.readVector(5, !1, this.vItemBarrageCount),
+        this.iNewSubNum = t.readInt32(7, !1, this.iNewSubNum)
+    },
+    HUYA.OnTVUserAwardInfo = function() {
+        this.lUid = 0,
+        this.lYYid = 0,
+        this.sNickName = "",
+        this.sLogo = "",
+        this.sAwardName = "",
+        this.tBarrage = new HUYA.OnTVBarrage
+    }
+    ,
+    HUYA.OnTVUserAwardInfo.prototype._clone = function() {
+        return new HUYA.OnTVUserAwardInfo
+    }
+    ,
+    HUYA.OnTVUserAwardInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVUserAwardInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVUserAwardInfo.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lUid),
+        t.writeInt64(1, this.lYYid),
+        t.writeString(2, this.sNickName),
+        t.writeString(3, this.sLogo),
+        t.writeString(4, this.sAwardName),
+        t.writeStruct(5, this.tBarrage)
+    }
+    ,
+    HUYA.OnTVUserAwardInfo.prototype.readFrom = function(t) {
+        this.lUid = t.readInt64(0, !1, this.lUid),
+        this.lYYid = t.readInt64(1, !1, this.lYYid),
+        this.sNickName = t.readString(2, !1, this.sNickName),
+        this.sLogo = t.readString(3, !1, this.sLogo),
+        this.sAwardName = t.readString(4, !1, this.sAwardName),
+        this.tBarrage = t.readStruct(5, !1, this.tBarrage)
+    }
+    ,
+    HUYA.OnTVGameInfo = function() {
+        this.lOnTVId = 0,
+        this.tSettingInfo = new HUYA.OnTVSettingInfo,
+        this.tData = new HUYA.OnTVData
+    }
+    ,
+    HUYA.OnTVGameInfo.prototype._clone = function() {
+        return new HUYA.OnTVGameInfo
+    }
+    ,
+    HUYA.OnTVGameInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVGameInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVGameInfo.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lOnTVId),
+        t.writeStruct(1, this.tSettingInfo),
+        t.writeStruct(2, this.tData)
+    }
+    ,
+    HUYA.OnTVGameInfo.prototype.readFrom = function(t) {
+        this.lOnTVId = t.readInt64(0, !1, this.lOnTVId),
+        this.tSettingInfo = t.readStruct(1, !1, this.tSettingInfo),
+        this.tData = t.readStruct(2, !1, this.tData)
+    },
+    HUYA.OnTVSettingInfo = function() {
+        this.sTitle = "",
+        this.tAward = new HUYA.OnTVAwardItem,
+        this.vTVPrice = new Taf.Vector(new HUYA.TVPrice),
+        this.lPid = 0,
+        this.sLogo = "",
+        this.iAwardMode = 0,
+        this.vPack = new Taf.Vector(new HUYA.OnTVItemPackage),
+        this.iPartic = 0,
+        this.iPartic2 = 0
+    }
+    ,
+    HUYA.OnTVSettingInfo.prototype._clone = function() {
+        return new HUYA.OnTVSettingInfo
+    }
+    ,
+    HUYA.OnTVSettingInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVSettingInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVSettingInfo.prototype.writeTo = function(t) {
+        t.writeString(0, this.sTitle),
+        t.writeStruct(1, this.tAward),
+        t.writeVector(2, this.vTVPrice),
+        t.writeInt64(3, this.lPid),
+        t.writeString(4, this.sLogo),
+        t.writeInt32(5, this.iAwardMode),
+        t.writeVector(6, this.vPack),
+        t.writeInt32(7, this.iPartic),
+        t.writeInt32(8, this.iPartic2)
+    }
+    ,
+    HUYA.OnTVSettingInfo.prototype.readFrom = function(t) {
+        this.sTitle = t.readString(0, !1, this.sTitle),
+        this.tAward = t.readStruct(1, !1, this.tAward),
+        this.vTVPrice = t.readVector(2, !1, this.vTVPrice),
+        this.lPid = t.readInt64(3, !1, this.lPid),
+        this.sLogo = t.readString(4, !1, this.sLogo),
+        this.iAwardMode = t.readInt32(5, !1, this.iAwardMode),
+        this.vPack = t.readVector(6, !1, this.vPack),
+        this.iPartic = t.readInt32(7, !1, this.iPartic),
+        this.iPartic2 = t.readInt32(8, !1, this.iPartic2)
+    },
+    HUYA.OnTVAwardItem = function() {
+        this.sAwardName = "",
+        this.iAwardNum = 0,
+        this.iAwardType = 0,
+        this.sAwardArgs = ""
+    }
+    ,
+    HUYA.OnTVAwardItem.prototype._clone = function() {
+        return new HUYA.OnTVAwardItem
+    }
+    ,
+    HUYA.OnTVAwardItem.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVAwardItem.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVAwardItem.prototype.writeTo = function(t) {
+        t.writeString(0, this.sAwardName),
+        t.writeInt32(1, this.iAwardNum),
+        t.writeInt32(2, this.iAwardType),
+        t.writeString(3, this.sAwardArgs)
+    }
+    ,
+    HUYA.OnTVAwardItem.prototype.readFrom = function(t) {
+        this.sAwardName = t.readString(0, !1, this.sAwardName),
+        this.iAwardNum = t.readInt32(1, !1, this.iAwardNum),
+        this.iAwardType = t.readInt32(2, !1, this.iAwardType),
+        this.sAwardArgs = t.readString(3, !1, this.sAwardArgs)
+    }
+    ,
+    HUYA.TVPrice = function() {
+        this.iTVType = 0,
+        this.iPrice = 0,
+        this.iFreeFansLevel = 0
+    }
+    ,
+    HUYA.TVPrice.prototype._clone = function() {
+        return new HUYA.TVPrice
+    }
+    ,
+    HUYA.TVPrice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.TVPrice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.TVPrice.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iTVType),
+        t.writeInt32(1, this.iPrice),
+        t.writeInt32(2, this.iFreeFansLevel)
+    }
+    ,
+    HUYA.TVPrice.prototype.readFrom = function(t) {
+        this.iTVType = t.readInt32(0, !1, this.iTVType),
+        this.iPrice = t.readInt32(1, !1, this.iPrice),
+        this.iFreeFansLevel = t.readInt32(2, !1, this.iFreeFansLevel)
+    }
+    ,
+    HUYA.OnTVItemPackage = function() {
+        this.iItemId = 0,
+        this.iItemNum = 0,
+        this.iTVType = 0,
+        this.iTVColor = 0,
+        this.sContent = ""
+    }
+    ,
+    HUYA.OnTVItemPackage.prototype._clone = function() {
+        return new HUYA.OnTVItemPackage
+    }
+    ,
+    HUYA.OnTVItemPackage.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVItemPackage.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVItemPackage.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iItemId),
+        t.writeInt32(1, this.iItemNum),
+        t.writeInt32(2, this.iTVType),
+        t.writeInt32(3, this.iTVColor),
+        t.writeString(4, this.sContent)
+    }
+    ,
+    HUYA.OnTVItemPackage.prototype.readFrom = function(t) {
+        this.iItemId = t.readInt32(0, !1, this.iItemId),
+        this.iItemNum = t.readInt32(1, !1, this.iItemNum),
+        this.iTVType = t.readInt32(2, !1, this.iTVType),
+        this.iTVColor = t.readInt32(3, !1, this.iTVColor),
+        this.sContent = t.readString(4, !1, this.sContent)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount = function() {
+        this.iTVType = 0,
+        this.iTVColor = 0,
+        this.iNum = 0,
+        this.sContent = "",
+        this.iItemId = 0,
+        this.iItemNum = 0
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._clone = function() {
+        return new HUYA.OnTVItemBarrageCount
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iTVType),
+        t.writeInt32(1, this.iTVColor),
+        t.writeInt32(2, this.iNum),
+        t.writeString(3, this.sContent),
+        t.writeInt32(4, this.iItemId),
+        t.writeInt32(5, this.iItemNum)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype.readFrom = function(t) {
+        this.iTVType = t.readInt32(0, !1, this.iTVType),
+        this.iTVColor = t.readInt32(1, !1, this.iTVColor),
+        this.iNum = t.readInt32(2, !1, this.iNum),
+        this.sContent = t.readString(3, !1, this.sContent),
+        this.iItemId = t.readInt32(4, !1, this.iItemId),
+        this.iItemNum = t.readInt32(5, !1, this.iItemNum)
+    },
+    HUYA.OnTVCfgDiy = function() {
+        this.tBarrage = new HUYA.OnTVCfgDiyBarrage,
+        this.tFlag = new HUYA.OnTVCfgDiyFlag,
+        this.tPanel = new HUYA.OnTVCfgDiyPanel
+    }
+    ,
+    HUYA.OnTVCfgDiy.prototype._clone = function() {
+        return new HUYA.OnTVCfgDiy
+    }
+    ,
+    HUYA.OnTVCfgDiy.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVCfgDiy.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVCfgDiy.prototype.writeTo = function(t) {
+        t.writeStruct(0, this.tBarrage),
+        t.writeStruct(1, this.tFlag),
+        t.writeStruct(2, this.tPanel)
+    }
+    ,
+    HUYA.OnTVCfgDiy.prototype.readFrom = function(t) {
+        this.tBarrage = t.readStruct(0, !1, this.tBarrage),
+        this.tFlag = t.readStruct(1, !1, this.tFlag),
+        this.tPanel = t.readStruct(2, !1, this.tPanel)
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage = function() {
+        this.sIcon = ""
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage.prototype._clone = function() {
+        return new HUYA.OnTVCfgDiyBarrage
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage.prototype.writeTo = function(t) {
+        t.writeString(0, this.sIcon)
+    }
+    ,
+    HUYA.OnTVCfgDiyBarrage.prototype.readFrom = function(t) {
+        this.sIcon = t.readString(0, !1, this.sIcon)
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag = function() {
+        this.sName = "上电视",
+        this.sPic = "http://livewebbs2.msstatic.com/ontv_<ua>.png"
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag.prototype._clone = function() {
+        return new HUYA.OnTVCfgDiyFlag
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag.prototype.writeTo = function(t) {
+        t.writeString(0, this.sName),
+        t.writeString(1, this.sPic)
+    }
+    ,
+    HUYA.OnTVCfgDiyFlag.prototype.readFrom = function(t) {
+        this.sName = t.readString(0, !1, this.sName),
+        this.sPic = t.readString(1, !1, this.sPic)
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel = function() {
+        this.sLogo = "",
+        this.sButtonIcon = "",
+        this.sAD = "",
+        this.sName = "",
+        this.sADJump = "",
+        this.sUIJson = ""
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel.prototype._clone = function() {
+        return new HUYA.OnTVCfgDiyPanel
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel.prototype.writeTo = function(t) {
+        t.writeString(0, this.sLogo),
+        t.writeString(1, this.sButtonIcon),
+        t.writeString(2, this.sAD),
+        t.writeString(3, this.sName),
+        t.writeString(4, this.sADJump),
+        t.writeString(5, this.sUIJson)
+    }
+    ,
+    HUYA.OnTVCfgDiyPanel.prototype.readFrom = function(t) {
+        this.sLogo = t.readString(0, !1, this.sLogo),
+        this.sButtonIcon = t.readString(1, !1, this.sButtonIcon),
+        this.sAD = t.readString(2, !1, this.sAD),
+        this.sName = t.readString(3, !1, this.sName),
+        this.sADJump = t.readString(4, !1, this.sADJump),
+        this.sUIJson = t.readString(5, !1, this.sUIJson)
+    }
+    ,    
+    HUYA.OnTVPanel = function() {
+        this.iState = 0,
+        this.tAward = new HUYA.OnTVAwardInfo,
+        this.tInfo = new HUYA.OnTVGameInfo,
+        this.iIsDiy = 0,
+        this.tDiy = new HUYA.OnTVCfgDiy
+    }
+    ,
+    HUYA.OnTVPanel.prototype._clone = function() {
+        return new HUYA.OnTVPanel
+    }
+    ,
+    HUYA.OnTVPanel.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVPanel.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVPanel.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iState),
+        t.writeStruct(1, this.tAward),
+        t.writeStruct(2, this.tInfo),
+        t.writeInt32(3, this.iIsDiy),
+        t.writeStruct(4, this.tDiy)
+    }
+    ,
+    HUYA.OnTVPanel.prototype.readFrom = function(t) {
+        this.iState = t.readInt32(0, !1, this.iState),
+        this.tAward = t.readStruct(1, !1, this.tAward),
+        this.tInfo = t.readStruct(2, !1, this.tInfo),
+        this.iIsDiy = t.readInt32(3, !1, this.iIsDiy),
+        this.tDiy = t.readStruct(4, !1, this.tDiy)
+    }
+    ,
+    HUYA.OnTVData = function() {
+        this.lOnTVId = 0,
+        this.iBarrageNum = 0,
+        this.lStartTS = 0,
+        this.iLeftTime = 0,
+        this.iUserNum = 0,
+        this.lEndTS = 0,
+        this.vItemBarrageCount = new Taf.Vector(new HUYA.OnTVItemBarrageCount)
+    }
+    ,
+    HUYA.OnTVData.prototype._clone = function() {
+        return new HUYA.OnTVData
+    }
+    ,
+    HUYA.OnTVData.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVData.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVData.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lOnTVId),
+        t.writeInt32(1, this.iBarrageNum),
+        t.writeInt64(2, this.lStartTS),
+        t.writeInt32(3, this.iLeftTime),
+        t.writeInt32(4, this.iUserNum),
+        t.writeInt32(5, this.lEndTS),
+        t.writeVector(6, this.vItemBarrageCount)
+    }
+    ,
+    HUYA.OnTVData.prototype.readFrom = function(t) {
+        this.lOnTVId = t.readInt64(0, !1, this.lOnTVId),
+        this.iBarrageNum = t.readInt32(1, !1, this.iBarrageNum),
+        this.lStartTS = t.readInt64(2, !1, this.lStartTS),
+        this.iLeftTime = t.readInt32(3, !1, this.iLeftTime),
+        this.iUserNum = t.readInt32(4, !1, this.iUserNum),
+        this.lEndTS = t.readInt32(5, !1, this.lEndTS),
+        this.vItemBarrageCount = t.readVector(6, !1, this.vItemBarrageCount)
+    },
+    HUYA.OnTVEndNotice = function() {
+        this.lOnTVId = 0
+    }
+    ,
+    HUYA.OnTVEndNotice.prototype._clone = function() {
+        return new HUYA.OnTVEndNotice
+    }
+    ,
+    HUYA.OnTVEndNotice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVEndNotice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVEndNotice.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lOnTVId)
+    }
+    ,
+    HUYA.OnTVEndNotice.prototype.readFrom = function(t) {
+        this.lOnTVId = t.readInt64(0, !1, this.lOnTVId)
+    }
+    ,
+    HUYA.OnTVBarrageNotice = function() {
+        this.lUid = 0,
+        this.tBarrage = new HUYA.OnTVBarrage,
+        this.sNickName = "",
+        this.iNobleLevel = 0,
+        this.lBadgeId = 0,
+        this.sBadgeName = "",
+        this.iBadgeLevel = 0,
+        this.lNobleValidDate = 0,
+        this.iAwardMode = 0,
+        this.lPid = 0,
+        this.sDiyIcon = "",
+        this.iBadgeType = 0,
+        this.sAvatarUrl = "",
+        this.tNobleLv = new HUYA.NobleLevelInfo,
+        this.iSFFlag = 0
+    }
+    ,
+    HUYA.OnTVBarrageNotice.prototype._clone = function() {
+        return new HUYA.OnTVBarrageNotice
+    }
+    ,
+    HUYA.OnTVBarrageNotice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVBarrageNotice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVBarrageNotice.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lUid),
+        t.writeStruct(1, this.tBarrage),
+        t.writeString(2, this.sNickName),
+        t.writeInt32(3, this.iNobleLevel),
+        t.writeInt64(4, this.lBadgeId),
+        t.writeString(5, this.sBadgeName),
+        t.writeInt32(6, this.iBadgeLevel),
+        t.writeInt32(7, this.lNobleValidDate),
+        t.writeInt32(8, this.iAwardMode),
+        t.writeInt64(9, this.lPid),
+        t.writeString(10, this.sDiyIcon),
+        t.writeInt32(11, this.iBadgeType),
+        t.writeString(12, this.sAvatarUrl),
+        t.writeStruct(13, this.tNobleLv),
+        t.writeInt32(14, this.iSFFlag)
+    }
+    ,
+    HUYA.OnTVBarrageNotice.prototype.readFrom = function(t) {
+        this.lUid = t.readInt64(0, !1, this.lUid),
+        this.tBarrage = t.readStruct(1, !1, this.tBarrage),
+        this.sNickName = t.readString(2, !1, this.sNickName),
+        this.iNobleLevel = t.readInt32(3, !1, this.iNobleLevel),
+        this.lBadgeId = t.readInt64(4, !1, this.lBadgeId),
+        this.sBadgeName = t.readString(5, !1, this.sBadgeName),
+        this.iBadgeLevel = t.readInt32(6, !1, this.iBadgeLevel),
+        this.lNobleValidDate = t.readInt32(7, !1, this.lNobleValidDate),
+        this.iAwardMode = t.readInt32(8, !1, this.iAwardMode),
+        this.lPid = t.readInt64(9, !1, this.lPid),
+        this.sDiyIcon = t.readString(10, !1, this.sDiyIcon),
+        this.iBadgeType = t.readInt32(11, !1, this.iBadgeType),
+        this.sAvatarUrl = t.readString(12, !1, this.sAvatarUrl),
+        this.tNobleLv = t.readStruct(13, !1, this.tNobleLv),
+        this.iSFFlag = t.readInt32(14, !1, this.iSFFlag)
+    }
+    ,
+    HUYA.OnTVBarrage = function() {
+        this.lUid = 0,
+        this.sContent = "",
+        this.iTVType = 0,
+        this.iTVColor = 0
+    }
+    ,   
+    HUYA.OnTVBarrage.prototype._clone = function() {
+        return new HUYA.OnTVBarrage
+    }
+    ,
+    HUYA.OnTVBarrage.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVBarrage.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVBarrage.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lUid),
+        t.writeString(1, this.sContent),
+        t.writeInt32(2, this.iTVType),
+        t.writeInt32(3, this.iTVColor)
+    }
+    ,
+    HUYA.OnTVBarrage.prototype.readFrom = function(t) {
+        this.lUid = t.readInt64(0, !1, this.lUid),
+        this.sContent = t.readString(1, !1, this.sContent),
+        this.iTVType = t.readInt32(2, !1, this.iTVType),
+        this.iTVColor = t.readInt32(3, !1, this.iTVColor)
+    }
+    ,
+    HUYA.NobleLevelInfo = function() {
+        this.iNobleLevel = 0,
+        this.iAttrType = 0
+    }
+    ,
+    HUYA.NobleLevelInfo.prototype._clone = function() {
+        return new HUYA.NobleLevelInfo
+    }
+    ,
+    HUYA.NobleLevelInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.NobleLevelInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.NobleLevelInfo.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iNobleLevel),
+        t.writeInt32(1, this.iAttrType)
+    }
+    ,
+    HUYA.NobleLevelInfo.prototype.readFrom = function(t) {
+        this.iNobleLevel = t.readInt32(0, !1, this.iNobleLevel),
+        this.iAttrType = t.readInt32(1, !1, this.iAttrType)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount = function() {
+        this.iTVType = 0,
+        this.iTVColor = 0,
+        this.iNum = 0,
+        this.sContent = "",
+        this.iItemId = 0,
+        this.iItemNum = 0
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._clone = function() {
+        return new HUYA.OnTVItemBarrageCount
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype.writeTo = function(t) {
+        t.writeInt32(0, this.iTVType),
+        t.writeInt32(1, this.iTVColor),
+        t.writeInt32(2, this.iNum),
+        t.writeString(3, this.sContent),
+        t.writeInt32(4, this.iItemId),
+        t.writeInt32(5, this.iItemNum)
+    }
+    ,
+    HUYA.OnTVItemBarrageCount.prototype.readFrom = function(t) {
+        this.iTVType = t.readInt32(0, !1, this.iTVType),
+        this.iTVColor = t.readInt32(1, !1, this.iTVColor),
+        this.iNum = t.readInt32(2, !1, this.iNum),
+        this.sContent = t.readString(3, !1, this.sContent),
+        this.iItemId = t.readInt32(4, !1, this.iItemId),
+        this.iItemNum = t.readInt32(5, !1, this.iItemNum)
+    }
+    ,
     HUYA.ExternalUser = function () {
         this.sId = "",
             this.sToken = "",
@@ -5927,7 +6609,7 @@ TafMx.UriMapping = {
     1003: HUYA.NobleSpeakBrst,
     1005: HUYA.NobleEnterNotice,
     6501: HUYA.SendItemSubBroadcastPacket,
-    6052: HUYA.SendItemNoticeWordBroadcastPacket,
+    6502: HUYA.SendItemNoticeWordBroadcastPacket,
     6200: HUYA.EnterPushInfo,
     6210: HUYA.VipBarListRsp,
     6220: HUYA.WeekRankListRsp,
@@ -5939,7 +6621,12 @@ TafMx.UriMapping = {
     6234: HUYA.UserGiftNotice,
     6250: HUYA.GiftBarRsp,
     1400: HUYA.MessageNotice,
-    8006: HUYA.AttendeeCountNotice
+    8006: HUYA.AttendeeCountNotice,
+    6294: HUYA.OnTVPanel,
+    6295: HUYA.OnTVPanel,
+    6296: HUYA.OnTVData,
+    6297: HUYA.OnTVEndNotice,
+    6298: HUYA.OnTVBarrageNotice,
 },
     TafMx.WupMapping = {
         doLaunch: HUYA.LiveLaunchRsp,
