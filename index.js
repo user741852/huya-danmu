@@ -43,6 +43,7 @@ class huya_danmu extends events {
             if (!subsid_array || !topsid_array || !yyuid_array) return
             // info.subsid = subsid_array[1] === '' ? 0 : parseInt(subsid_array[1])
             // info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1])
+            //info.yyuid = parseInt(yyuid_array[1])
             info.yyuid = parseInt(yyuid_array[1])
             //主播未开播时，subsid，topsid都为空。这种情况下，爬虫无法抓取弹幕。
             //通过观察发现，subsid，topsid似乎和yyuid是一样的。因此，尝试通过把subsid和topsid设置成和yyuid一样来解决上述问题
@@ -133,6 +134,15 @@ class huya_danmu extends events {
                     price: item.iPropsYb / 100
                 }
             })
+        }),
+        this._emitter.on("6210", msg => {
+            const msg_obj = {
+                total: msg.iCount,
+                time: new Date(),
+                list: msg.vVipBarItem.value,
+                type: "VipBarList"
+            }
+            this.emit('message', msg_obj)
         })
     }
 
