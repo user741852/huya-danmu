@@ -6903,6 +6903,38 @@ HUYA.EWebSocketCommandType = {
         this.iFrameRate = t.readInt32(3, !1, this.iFrameRate),
         this.lLiveId = t.readInt64(4, !1, this.lLiveId),
         this.sDisplayName = t.readString(5, !1, this.sDisplayName)
+    },
+    HUYA.EndLiveNotice = function() {
+        this.lPresenterUid = 0,
+        this.iReason = 0,
+        this.lLiveId = 0,
+        this.sReason = ""
+    }
+    ,
+    HUYA.EndLiveNotice.prototype._clone = function() {
+        return new HUYA.EndLiveNotice
+    }
+    ,
+    HUYA.EndLiveNotice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.EndLiveNotice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.EndLiveNotice.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lPresenterUid),
+        t.writeInt32(1, this.iReason),
+        t.writeInt64(2, this.lLiveId),
+        t.writeString(3, this.sReason)
+    }
+    ,
+    HUYA.EndLiveNotice.prototype.readFrom = function(t) {
+        this.lPresenterUid = t.readInt64(0, !1, this.lPresenterUid),
+        this.iReason = t.readInt32(1, !1, this.iReason),
+        this.lLiveId = t.readInt64(2, !1, this.lLiveId),
+        this.sReason = t.readString(3, !1, this.sReason)
     }
     ;
 var TafMx = TafMx || {};
@@ -6929,7 +6961,8 @@ TafMx.UriMapping = {
     6296: HUYA.OnTVData,
     6297: HUYA.OnTVEndNotice,
     6298: HUYA.OnTVBarrageNotice,
-    8e3: HUYA.BeginLiveNotice
+    8e3: HUYA.BeginLiveNotice,
+    8001: HUYA.EndLiveNotice
 },
     TafMx.WupMapping = {
         doLaunch: HUYA.LiveLaunchRsp,
