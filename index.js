@@ -144,6 +144,23 @@ class huya_danmu extends events {
             }
             this.emit('message', msg_obj)
         })
+        this._emitter.on("8000", msg => {
+            const msg_obj = {
+                time: new Date(),
+                type: "beginLive",
+                info: msg
+            }
+            this.emit('message', msg_obj)
+        })
+        /*,
+        this._emitter.on("8001", msg => {
+            const msg_obj = {
+                time: new Date(),
+                type: "endLive",
+                info: msg
+            }
+            this.emit('message', msg_obj)
+        })*/
     }
 
     _get_gift_list() {

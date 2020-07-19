@@ -6601,6 +6601,308 @@ HUYA.EWebSocketCommandType = {
     HUYA.MetricSet.prototype.readFrom = function (t) {
         this.tId = t.readStruct(0, !0, this.tId),
             this.vMetric = t.readVector(1, !0, this.vMetric)
+    },
+    HUYA.BeginLiveNotice = function() {
+        this.lPresenterUid = 0,
+        this.iGameId = 0,
+        this.sGameName = "",
+        this.iRandomRange = 0,
+        this.iStreamType = 0,
+        this.vStreamInfo = new Taf.Vector(new HUYA.StreamInfo),
+        this.vCdnList = new Taf.Vector(new Taf.STRING),
+        this.lLiveId = 0,
+        this.iPCDefaultBitRate = 0,
+        this.iWebDefaultBitRate = 0,
+        this.iMobileDefaultBitRate = 0,
+        this.lMultiStreamFlag = 0,
+        this.sNick = "",
+        this.lYYId = 0,
+        this.lAttendeeCount = 0,
+        this.iCodecType = 0,
+        this.iScreenType = 0,
+        this.vMultiStreamInfo = new Taf.Vector(new HUYA.MultiStreamInfo),
+        this.sLiveDesc = "",
+        this.lLiveCompatibleFlag = 0,
+        this.sAvatarUrl = "",
+        this.iSourceType = 0,
+        this.sSubchannelName = "",
+        this.sVideoCaptureUrl = "",
+        this.iStartTime = 0,
+        this.lChannelId = 0,
+        this.lSubChannelId = 0,
+        this.sLocation = "",
+        this.iCdnPolicyLevel = 0,
+        this.iGameType = 0,
+        this.mMiscInfo = new Taf.Map(new Taf.STRING,new Taf.STRING),
+        this.iShortChannel = 0,
+        this.iRoomId = 0,
+        this.bIsRoomSecret = 0,
+        this.iHashPolicy = 0,
+        this.lSignChannel = 0,
+        this.iMobileWifiDefaultBitRate = 0
+    }
+    ,
+    HUYA.BeginLiveNotice.prototype._clone = function() {
+        return new HUYA.BeginLiveNotice
+    }
+    ,
+    HUYA.BeginLiveNotice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.BeginLiveNotice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.BeginLiveNotice.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lPresenterUid),
+        t.writeInt32(1, this.iGameId),
+        t.writeString(2, this.sGameName),
+        t.writeInt32(3, this.iRandomRange),
+        t.writeInt32(4, this.iStreamType),
+        t.writeVector(5, this.vStreamInfo),
+        t.writeVector(6, this.vCdnList),
+        t.writeInt64(7, this.lLiveId),
+        t.writeInt32(8, this.iPCDefaultBitRate),
+        t.writeInt32(9, this.iWebDefaultBitRate),
+        t.writeInt32(10, this.iMobileDefaultBitRate),
+        t.writeInt64(11, this.lMultiStreamFlag),
+        t.writeString(12, this.sNick),
+        t.writeInt64(13, this.lYYId),
+        t.writeInt64(14, this.lAttendeeCount),
+        t.writeInt32(15, this.iCodecType),
+        t.writeInt32(16, this.iScreenType),
+        t.writeVector(17, this.vMultiStreamInfo),
+        t.writeString(18, this.sLiveDesc),
+        t.writeInt64(19, this.lLiveCompatibleFlag),
+        t.writeString(20, this.sAvatarUrl),
+        t.writeInt32(21, this.iSourceType),
+        t.writeString(22, this.sSubchannelName),
+        t.writeString(23, this.sVideoCaptureUrl),
+        t.writeInt32(24, this.iStartTime),
+        t.writeInt64(25, this.lChannelId),
+        t.writeInt64(26, this.lSubChannelId),
+        t.writeString(27, this.sLocation),
+        t.writeInt32(28, this.iCdnPolicyLevel),
+        t.writeInt32(29, this.iGameType),
+        t.writeMap(30, this.mMiscInfo),
+        t.writeInt32(31, this.iShortChannel),
+        t.writeInt32(32, this.iRoomId),
+        t.writeInt32(33, this.bIsRoomSecret),
+        t.writeInt32(34, this.iHashPolicy),
+        t.writeInt64(35, this.lSignChannel),
+        t.writeInt32(36, this.iMobileWifiDefaultBitRate)
+    }
+    ,
+    HUYA.BeginLiveNotice.prototype.readFrom = function(t) {
+        this.lPresenterUid = t.readInt64(0, !1, this.lPresenterUid),
+        this.iGameId = t.readInt32(1, !1, this.iGameId),
+        this.sGameName = t.readString(2, !1, this.sGameName),
+        this.iRandomRange = t.readInt32(3, !1, this.iRandomRange),
+        this.iStreamType = t.readInt32(4, !1, this.iStreamType),
+        this.vStreamInfo = t.readVector(5, !1, this.vStreamInfo),
+        this.vCdnList = t.readVector(6, !1, this.vCdnList),
+        this.lLiveId = t.readInt64(7, !1, this.lLiveId),
+        this.iPCDefaultBitRate = t.readInt32(8, !1, this.iPCDefaultBitRate),
+        this.iWebDefaultBitRate = t.readInt32(9, !1, this.iWebDefaultBitRate),
+        this.iMobileDefaultBitRate = t.readInt32(10, !1, this.iMobileDefaultBitRate),
+        this.lMultiStreamFlag = t.readInt64(11, !1, this.lMultiStreamFlag),
+        this.sNick = t.readString(12, !1, this.sNick),
+        this.lYYId = t.readInt64(13, !1, this.lYYId),
+        this.lAttendeeCount = t.readInt64(14, !1, this.lAttendeeCount),
+        this.iCodecType = t.readInt32(15, !1, this.iCodecType),
+        this.iScreenType = t.readInt32(16, !1, this.iScreenType),
+        this.vMultiStreamInfo = t.readVector(17, !1, this.vMultiStreamInfo),
+        this.sLiveDesc = t.readString(18, !1, this.sLiveDesc),
+        this.lLiveCompatibleFlag = t.readInt64(19, !1, this.lLiveCompatibleFlag),
+        this.sAvatarUrl = t.readString(20, !1, this.sAvatarUrl),
+        this.iSourceType = t.readInt32(21, !1, this.iSourceType),
+        this.sSubchannelName = t.readString(22, !1, this.sSubchannelName),
+        this.sVideoCaptureUrl = t.readString(23, !1, this.sVideoCaptureUrl),
+        this.iStartTime = t.readInt32(24, !1, this.iStartTime),
+        this.lChannelId = t.readInt64(25, !1, this.lChannelId),
+        this.lSubChannelId = t.readInt64(26, !1, this.lSubChannelId),
+        this.sLocation = t.readString(27, !1, this.sLocation),
+        this.iCdnPolicyLevel = t.readInt32(28, !1, this.iCdnPolicyLevel),
+        this.iGameType = t.readInt32(29, !1, this.iGameType),
+        this.mMiscInfo = t.readMap(30, !1, this.mMiscInfo),
+        this.iShortChannel = t.readInt32(31, !1, this.iShortChannel),
+        this.iRoomId = t.readInt32(32, !1, this.iRoomId),
+        this.bIsRoomSecret = t.readInt32(33, !1, this.bIsRoomSecret),
+        this.iHashPolicy = t.readInt32(34, !1, this.iHashPolicy),
+        this.lSignChannel = t.readInt64(35, !1, this.lSignChannel),
+        this.iMobileWifiDefaultBitRate = t.readInt32(36, !1, this.iMobileWifiDefaultBitRate)
+    }
+    ,
+    HUYA.StreamInfo = function() {
+        this.sCdnType = "",
+        this.iIsMaster = 0,
+        this.lChannelId = 0,
+        this.lSubChannelId = 0,
+        this.lPresenterUid = 0,
+        this.sStreamName = "",
+        this.sFlvUrl = "",
+        this.sFlvUrlSuffix = "",
+        this.sFlvAntiCode = "",
+        this.sHlsUrl = "",
+        this.sHlsUrlSuffix = "",
+        this.sHlsAntiCode = "",
+        this.iLineIndex = 0,
+        this.iIsMultiStream = 0,
+        this.iPCPriorityRate = 0,
+        this.iWebPriorityRate = 0,
+        this.iMobilePriorityRate = 0,
+        this.vFlvIPList = new Taf.Vector(new Taf.STRING),
+        this.iIsP2PSupport = 0,
+        this.sP2pUrl = "",
+        this.sP2pUrlSuffix = "",
+        this.sP2pAntiCode = "",
+        this.lFreeFlag = 0,
+        this.iIsHEVCSupport = 0,
+        this.vP2pIPList = new Taf.Vector(new Taf.STRING)
+    }
+    ,
+    HUYA.StreamInfo.prototype._clone = function() {
+        return new HUYA.StreamInfo
+    }
+    ,
+    HUYA.StreamInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.StreamInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.StreamInfo.prototype.writeTo = function(t) {
+        t.writeString(0, this.sCdnType),
+        t.writeInt32(1, this.iIsMaster),
+        t.writeInt64(2, this.lChannelId),
+        t.writeInt64(3, this.lSubChannelId),
+        t.writeInt64(4, this.lPresenterUid),
+        t.writeString(5, this.sStreamName),
+        t.writeString(6, this.sFlvUrl),
+        t.writeString(7, this.sFlvUrlSuffix),
+        t.writeString(8, this.sFlvAntiCode),
+        t.writeString(9, this.sHlsUrl),
+        t.writeString(10, this.sHlsUrlSuffix),
+        t.writeString(11, this.sHlsAntiCode),
+        t.writeInt32(12, this.iLineIndex),
+        t.writeInt32(13, this.iIsMultiStream),
+        t.writeInt32(14, this.iPCPriorityRate),
+        t.writeInt32(15, this.iWebPriorityRate),
+        t.writeInt32(16, this.iMobilePriorityRate),
+        t.writeVector(17, this.vFlvIPList),
+        t.writeInt32(18, this.iIsP2PSupport),
+        t.writeString(19, this.sP2pUrl),
+        t.writeString(20, this.sP2pUrlSuffix),
+        t.writeString(21, this.sP2pAntiCode),
+        t.writeInt64(22, this.lFreeFlag),
+        t.writeInt32(23, this.iIsHEVCSupport),
+        t.writeVector(24, this.vP2pIPList)
+    }
+    ,
+    HUYA.StreamInfo.prototype.readFrom = function(t) {
+        this.sCdnType = t.readString(0, !1, this.sCdnType),
+        this.iIsMaster = t.readInt32(1, !1, this.iIsMaster),
+        this.lChannelId = t.readInt64(2, !1, this.lChannelId),
+        this.lSubChannelId = t.readInt64(3, !1, this.lSubChannelId),
+        this.lPresenterUid = t.readInt64(4, !1, this.lPresenterUid),
+        this.sStreamName = t.readString(5, !1, this.sStreamName),
+        this.sFlvUrl = t.readString(6, !1, this.sFlvUrl),
+        this.sFlvUrlSuffix = t.readString(7, !1, this.sFlvUrlSuffix),
+        this.sFlvAntiCode = t.readString(8, !1, this.sFlvAntiCode),
+        this.sHlsUrl = t.readString(9, !1, this.sHlsUrl),
+        this.sHlsUrlSuffix = t.readString(10, !1, this.sHlsUrlSuffix),
+        this.sHlsAntiCode = t.readString(11, !1, this.sHlsAntiCode),
+        this.iLineIndex = t.readInt32(12, !1, this.iLineIndex),
+        this.iIsMultiStream = t.readInt32(13, !1, this.iIsMultiStream),
+        this.iPCPriorityRate = t.readInt32(14, !1, this.iPCPriorityRate),
+        this.iWebPriorityRate = t.readInt32(15, !1, this.iWebPriorityRate),
+        this.iMobilePriorityRate = t.readInt32(16, !1, this.iMobilePriorityRate),
+        this.vFlvIPList = t.readVector(17, !1, this.vFlvIPList),
+        this.iIsP2PSupport = t.readInt32(18, !1, this.iIsP2PSupport),
+        this.sP2pUrl = t.readString(19, !1, this.sP2pUrl),
+        this.sP2pUrlSuffix = t.readString(20, !1, this.sP2pUrlSuffix),
+        this.sP2pAntiCode = t.readString(21, !1, this.sP2pAntiCode),
+        this.lFreeFlag = t.readInt64(22, !1, this.lFreeFlag),
+        this.iIsHEVCSupport = t.readInt32(23, !1, this.iIsHEVCSupport),
+        this.vP2pIPList = t.readVector(24, !1, this.vP2pIPList)
+    }
+    ,
+    HUYA.MultiStreamInfo = function() {
+        this.sDisplayName = "",
+        this.iBitRate = 0,
+        this.iCodecType = 0,
+        this.iCompatibleFlag = 0,
+        this.iHEVCBitRate = -1
+    }
+    ,
+    HUYA.MultiStreamInfo.prototype._clone = function() {
+        return new HUYA.MultiStreamInfo
+    }
+    ,
+    HUYA.MultiStreamInfo.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.MultiStreamInfo.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.MultiStreamInfo.prototype.writeTo = function(t) {
+        t.writeString(0, this.sDisplayName),
+        t.writeInt32(1, this.iBitRate),
+        t.writeInt32(2, this.iCodecType),
+        t.writeInt32(3, this.iCompatibleFlag),
+        t.writeInt32(4, this.iHEVCBitRate)
+    }
+    ,
+    HUYA.MultiStreamInfo.prototype.readFrom = function(t) {
+        this.sDisplayName = t.readString(0, !1, this.sDisplayName),
+        this.iBitRate = t.readInt32(1, !1, this.iBitRate),
+        this.iCodecType = t.readInt32(2, !1, this.iCodecType),
+        this.iCompatibleFlag = t.readInt32(3, !1, this.iCompatibleFlag),
+        this.iHEVCBitRate = t.readInt32(4, !1, this.iHEVCBitRate)
+    }
+    ,
+    HUYA.StreamSettingNotice = function() {
+        this.lPresenterUid = 0,
+        this.iBitRate = 0,
+        this.iResolution = 0,
+        this.iFrameRate = 0,
+        this.lLiveId = 0,
+        this.sDisplayName = ""
+    }
+    ,
+    HUYA.StreamSettingNotice.prototype._clone = function() {
+        return new HUYA.StreamSettingNotice
+    }
+    ,
+    HUYA.StreamSettingNotice.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.StreamSettingNotice.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.StreamSettingNotice.prototype.writeTo = function(t) {
+        t.writeInt64(0, this.lPresenterUid),
+        t.writeInt32(1, this.iBitRate),
+        t.writeInt32(2, this.iResolution),
+        t.writeInt32(3, this.iFrameRate),
+        t.writeInt64(4, this.lLiveId),
+        t.writeString(5, this.sDisplayName)
+    }
+    ,
+    HUYA.StreamSettingNotice.prototype.readFrom = function(t) {
+        this.lPresenterUid = t.readInt64(0, !1, this.lPresenterUid),
+        this.iBitRate = t.readInt32(1, !1, this.iBitRate),
+        this.iResolution = t.readInt32(2, !1, this.iResolution),
+        this.iFrameRate = t.readInt32(3, !1, this.iFrameRate),
+        this.lLiveId = t.readInt64(4, !1, this.lLiveId),
+        this.sDisplayName = t.readString(5, !1, this.sDisplayName)
     }
     ;
 var TafMx = TafMx || {};
@@ -6627,6 +6929,7 @@ TafMx.UriMapping = {
     6296: HUYA.OnTVData,
     6297: HUYA.OnTVEndNotice,
     6298: HUYA.OnTVBarrageNotice,
+    8e3: HUYA.BeginLiveNotice
 },
     TafMx.WupMapping = {
         doLaunch: HUYA.LiveLaunchRsp,
