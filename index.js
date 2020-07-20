@@ -151,8 +151,7 @@ class huya_danmu extends events {
                 info: msg
             }
             this.emit('message', msg_obj)
-        })
-        /*,
+        }),
         this._emitter.on("8001", msg => {
             const msg_obj = {
                 time: new Date(),
@@ -160,7 +159,7 @@ class huya_danmu extends events {
                 info: msg
             }
             this.emit('message', msg_obj)
-        })*/
+        })
     }
 
     _get_gift_list() {
