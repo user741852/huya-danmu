@@ -136,10 +136,17 @@ class huya_danmu extends events {
             })
         }),
         this._emitter.on("6210", msg => {
+            let people = []
+            msg.vVipBarItem.value.forEach(item => {
+                people.push({
+                    lUid: item.lUid,
+                    name: item.sNickName
+                })
+            })
             const msg_obj = {
                 total: msg.iCount,
                 time: new Date(),
-                list: msg.vVipBarItem.value,
+                list: people,
                 type: "VipBarList"
             }
             this.emit('message', msg_obj)
