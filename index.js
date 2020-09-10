@@ -66,7 +66,7 @@ class huya_danmu extends events {
     }
 
     _start_ws() {
-        this._client = new ws('ws://ws.api.huya.com', {
+        this._client = new ws('wss://cdnws.api.huya.com', {
             perMessageDeflate: false,
             agent: this._agent
         })
@@ -102,7 +102,7 @@ class huya_danmu extends events {
                     name: msg.tUserInfo.sNickName,
                     rid: msg.tUserInfo.lUid + '',
                 },
-                id: md5(JSON.stringify(msg)),
+                //将id下放到应用调用层进行处理
                 content: msg.sContent
             }
             const can_emit = this._chat_list.push(msg_obj.from.rid + msg_obj.content, msg_obj.time)
