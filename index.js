@@ -166,6 +166,11 @@ class huya_danmu extends events {
                 info: msg
             }
             this.emit('message', msg_obj)
+        }),
+        this._emitter.on("getLivingInfo", msg => {
+            if(this.getLivingInfoCallback){
+                this.getLivingInfoCallback(msg)
+            }
         })
     }
 
@@ -206,6 +211,19 @@ class huya_danmu extends events {
         heart_beat_req.lPid = this._info.yyuid
         heart_beat_req.eLineType = 1
         this._send_wup("onlineui", "OnUserHeartBeat", heart_beat_req)
+    }
+
+    _get_living_info(){
+        var get_living_info_req = new HUYA.GetLivingInfoReq();
+        let user_id = new HUYA.UserId()
+        user_id.sHuYaUA = "webh5&1.0.0&websocket"
+        get_living_info_req.tId = user_id;
+        get_living_info_req.lTopSid = this._info.topsid;
+        get_living_info_req.lSubSid = this._info.subsid;
+        get_living_info_req.lPresenterUid = this._info.yyuid;
+        get_living_info_req.sTraceSource = null;
+        get_living_info_req.sPassword = "";
+        this._send_wup("liveui", "getLivingInfo",get_living_info_req)
     }
 
     _on_mes(data) {
@@ -270,6 +288,11 @@ class huya_danmu extends events {
     stop() {
         this.removeAllListeners()
         this._stop()
+    }
+
+    getLivingInfo(callback){
+        this._get_living_info()
+        this.getLivingInfoCallback = callback;
     }
 }
 
