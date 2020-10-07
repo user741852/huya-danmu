@@ -1190,8 +1190,8 @@ Taf.Wup = function () {
             this.sFuncName = t.readString(6, !0),
             this.sBuffer = t.readBytes(7, !0),
             this.iTimeout = t.readInt32(8, !0),
-            this.context = t.readMap(9, !0),
-            this.status = t.readMap(10, !0)
+            this.context = t.readMap(9, !0, new Taf.Map(new Taf.STRING,new Taf.STRING)),
+            this.status = t.readMap(10, !0, new Taf.Map(new Taf.STRING,new Taf.STRING))
     }
     ,
     Taf.Wup.prototype.decode = function (t) {
@@ -6935,6 +6935,47 @@ HUYA.EWebSocketCommandType = {
         this.iReason = t.readInt32(1, !1, this.iReason),
         this.lLiveId = t.readInt64(2, !1, this.lLiveId),
         this.sReason = t.readString(3, !1, this.sReason)
+    },
+    HUYA.GetLivingInfoReq = function() {
+        this.tId = new HUYA.UserId,
+        this.lTopSid = 0,
+        this.lSubSid = 0,
+        this.lPresenterUid = 0,
+        this.sTraceSource = "",
+        this.sPassword = "",
+        this.iRoomId = 0
+    }
+    ,
+    HUYA.GetLivingInfoReq.prototype._clone = function() {
+        return new HUYA.GetLivingInfoReq
+    }
+    ,
+    HUYA.GetLivingInfoReq.prototype._write = function(t, e, i) {
+        t.writeStruct(e, i)
+    }
+    ,
+    HUYA.GetLivingInfoReq.prototype._read = function(t, e, i) {
+        return t.readStruct(e, !0, i)
+    }
+    ,
+    HUYA.GetLivingInfoReq.prototype.writeTo = function(t) {
+        t.writeStruct(0, this.tId),
+        t.writeInt64(1, this.lTopSid),
+        t.writeInt64(2, this.lSubSid),
+        t.writeInt64(3, this.lPresenterUid),
+        t.writeString(4, this.sTraceSource),
+        t.writeString(5, this.sPassword),
+        t.writeInt64(6, this.iRoomId)
+    }
+    ,
+    HUYA.GetLivingInfoReq.prototype.readFrom = function(t) {
+        this.tId = t.readStruct(0, !1, this.tId),
+        this.lTopSid = t.readInt64(1, !1, this.lTopSid),
+        this.lSubSid = t.readInt64(2, !1, this.lSubSid),
+        this.lPresenterUid = t.readInt64(3, !1, this.lPresenterUid),
+        this.sTraceSource = t.readString(4, !1, this.sTraceSource),
+        this.sPassword = t.readString(5, !1, this.sPassword),
+        this.iRoomId = t.readInt64(6, !1, this.iRoomId)
     }
     ;
 var TafMx = TafMx || {};
