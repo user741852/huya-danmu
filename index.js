@@ -55,14 +55,18 @@ class huya_danmu extends events {
     }
 
     async start() {
-        if (this._starting) return
-        this._starting = true
-        this._info = await this._get_chat_info()
-        if (!this._info) return this.emit('close')
-        this._main_user_id = new HUYA.UserId()
-        this._main_user_id.lUid = this._info.yyuid
-        this._main_user_id.sHuYaUA = "webh5&1.0.0&websocket"
-        this._start_ws()
+        try{
+            if (this._starting) return
+            this._starting = true
+            this._info = await this._get_chat_info()
+            if (!this._info) return this.emit('close')
+            this._main_user_id = new HUYA.UserId()
+            this._main_user_id.lUid = this._info.yyuid
+            this._main_user_id.sHuYaUA = "webh5&1.0.0&websocket"
+            this._start_ws()
+        }catch(e){
+            this.start()
+        }
     }
 
     _start_ws() {
