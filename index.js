@@ -50,8 +50,7 @@ class huya_danmu extends events {
             info.subsid = info.topsid = info.yyuid
             return info
         } catch (e) {
-            //this.emit('error', new Error('Fail to get info'))
-            this._get_chat_info()
+            await this._get_chat_info()
         }
     }
 
@@ -66,7 +65,8 @@ class huya_danmu extends events {
             this._main_user_id.sHuYaUA = "webh5&1.0.0&websocket"
             this._start_ws()
         }catch(e){
-            this.start()
+            this._starting = false
+            await this.start()
         }
     }
 
